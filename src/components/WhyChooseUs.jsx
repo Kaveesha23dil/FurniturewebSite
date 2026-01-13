@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const WhyChooseUs = () => {
     return (
@@ -9,7 +10,13 @@ const WhyChooseUs = () => {
                     {/* Image Side */}
                     <div className="relative">
                         <div className="absolute top-0 right-0 w-3/4 h-3/4 bg-orange-50 rounded-full blur-3xl -z-10 translate-x-12 -translate-y-12"></div>
-                        <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                        <motion.div
+                            initial={{ opacity: 0, x: -50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.8 }}
+                            className="relative rounded-2xl overflow-hidden shadow-2xl"
+                        >
                             <img
                                 src="https://images.unsplash.com/photo-1556020685-ae41abfc9365?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                                 alt="Interior Design"
@@ -18,17 +25,27 @@ const WhyChooseUs = () => {
 
                             {/* Floating Play Button Overlay */}
                             <div className="absolute inset-0 flex items-center justify-center">
-                                <button className="bg-white/30 backdrop-blur-sm p-4 rounded-full hover:scale-110 transition-transform duration-300 group ring-4 ring-white/20">
+                                <motion.button
+                                    whileHover={{ scale: 1.1 }}
+                                    whileTap={{ scale: 0.9 }}
+                                    className="bg-white/30 backdrop-blur-sm p-4 rounded-full transition-transform duration-300 group ring-4 ring-white/20"
+                                >
                                     <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg">
                                         <svg className="w-6 h-6 ml-1 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
                                     </div>
-                                </button>
+                                </motion.button>
                             </div>
-                        </div>
+                        </motion.div>
                     </div>
 
                     {/* Text Side */}
-                    <div className="space-y-8">
+                    <motion.div
+                        initial={{ opacity: 0, x: 50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.8 }}
+                        className="space-y-8"
+                    >
                         <div>
                             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Why Choose Us</h2>
                             <p className="text-gray-600 leading-relaxed">
@@ -42,7 +59,14 @@ const WhyChooseUs = () => {
                                 { title: "Modern & Functional Design", desc: "Pieces designed to fit perfectly into contemporary living spaces." },
                                 { title: "Long-lasting Durability", desc: "Built to withstand the test of time and daily use." },
                             ].map((item, idx) => (
-                                <div key={idx} className="flex gap-4">
+                                <motion.div
+                                    key={idx}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5, delay: idx * 0.1 + 0.5 }}
+                                    className="flex gap-4"
+                                >
                                     <div className="flex-shrink-0">
                                         <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center text-white">
                                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
@@ -52,7 +76,7 @@ const WhyChooseUs = () => {
                                         <h3 className="text-xl font-bold text-gray-900 mb-1">{item.title}</h3>
                                         <p className="text-gray-600 text-sm">{item.desc}</p>
                                     </div>
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
 
@@ -62,7 +86,7 @@ const WhyChooseUs = () => {
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                             </a>
                         </div>
-                    </div>
+                    </motion.div>
 
                 </div>
             </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
 const products = [
     { id: 1, name: 'Cozy Sofa', price: 120.00, category: 'Sofa', image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80' },
@@ -22,7 +23,15 @@ const Products = () => {
         <section className="py-16 md:py-24 bg-gray-50/50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Our Best Quality Products</h2>
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        className="text-3xl md:text-4xl font-bold text-gray-900 mb-6"
+                    >
+                        Our Best Quality Products
+                    </motion.h2>
 
                     <div className="flex flex-wrap justify-center gap-2 md:gap-4">
                         {categories.map(category => (
@@ -30,8 +39,8 @@ const Products = () => {
                                 key={category}
                                 onClick={() => setActiveCategory(category)}
                                 className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === category
-                                        ? 'bg-black text-white shadow-lg scale-105'
-                                        : 'bg-white text-gray-600 border border-gray-200 hover:border-black hover:text-black'
+                                    ? 'bg-black text-white shadow-lg scale-105'
+                                    : 'bg-white text-gray-600 border border-gray-200 hover:border-black hover:text-black'
                                     }`}
                             >
                                 {category}
@@ -40,9 +49,30 @@ const Products = () => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <motion.div
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, amount: 0.2 }}
+                    variants={{
+                        hidden: { opacity: 0 },
+                        show: {
+                            opacity: 1,
+                            transition: {
+                                staggerChildren: 0.1
+                            }
+                        }
+                    }}
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+                >
                     {filteredProducts.map((product) => (
-                        <div key={product.id} className="bg-white rounded-2xl p-4 shadow-sm hover:shadow-xl transition-shadow duration-300 group">
+                        <motion.div
+                            key={product.id}
+                            variants={{
+                                hidden: { opacity: 0, y: 30 },
+                                show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+                            }}
+                            className="bg-white rounded-2xl p-4 shadow-sm hover:shadow-xl transition-shadow duration-300 group"
+                        >
                             <div className="relative aspect-square overflow-hidden rounded-xl bg-gray-100 mb-4">
                                 <img
                                     src={product.image}
@@ -62,9 +92,9 @@ const Products = () => {
                                     ${product.price.toFixed(2)}
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
         </section>
     );
